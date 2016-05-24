@@ -1,0 +1,23 @@
+<html>
+	<head>
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+	<script>
+	function sortJsonPoints(a,b){
+		return parseFloat(b.points) - parseFloat(a.points);
+	};
+    $(document).ready(function() {
+    	$.getJSON("user.php", function(cats){
+			cats = $(cats).sort(sortJsonPoints);
+      		var lhtml = '';
+      		$.each(cats, function(index, cat){ 		
+      			lhtml += 'Username: '+cat.user+'&nbsp; Points: '+cat.points+'<br>';
+      		});
+      		$('#navlist').append(lhtml);
+        });
+    });
+     </script>
+	</head>
+	<body>
+		<ul id="navlist"></ul>
+	</body>
+</html>

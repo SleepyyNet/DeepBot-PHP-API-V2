@@ -5,8 +5,8 @@ if (isset($_GET['server']) && isset($_GET['secret'])) {
 	$secret = $_GET['secret'];
 
 	// Load depedencies
-	require __DIR__ . '/config/config_inc.php';
-	require dirname(__FILE__) . '/vendor/autoload.php';
+	require '../config/config_inc.php';
+	require '../vendor/autoload.php';
 
 $bot = Deepbot\API::instance(array(
 	'server' 	=> $config['server'],
@@ -18,21 +18,21 @@ $bot = Deepbot\API::instance(array(
 	echo 'Not Set Up';
 }
 
+//Global Variable
+
+$pointsname = $config['pointsname'];
+
+//SetPoints
+
 if (isset($_GET['user'])) {
 	$user = $_GET['user'];
-	$vip = $_GET['vip'];
-	$days = $_GET['days'];
-	$bot->setUserVip($user, $vip, $days);
-	if ($vip == '1') {
-		$vip = 'Bronze';
-	} else if ($vip == '2') {
-		$vip = 'Silver';
-	} else if ($vip == '3') {
-		$vip = 'Gold';
-	} else {
-		$vip = 'None';
+	$points = $_GET['points'];
+	$bot->addPoints($user, $points);
+	if ($points == '') {
+		$points = $points;
 	}
-	echo 'Set ' . $user . ' ' . $vip . ' ' . $days;
+	
+	echo 'Added ' . $user . ' ' . $points . ' ' . $pointsname;
 } else {
 	echo 'UnSet';
 }

@@ -1,4 +1,5 @@
 <?php
+
 if (isset($_GET['number']) && !empty($_GET['number'])) {
 	$number = $_GET['number'];
 	if (is_numeric($number) && $number > 0) {
@@ -11,4 +12,5 @@ if (isset($_GET['number']) && !empty($_GET['number'])) {
 		echo "false";
 	}
 }
+
 ?>

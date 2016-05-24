@@ -14,4 +14,5 @@ $bot = Deepbot\API::instance(array(
 header('Content-Type: application/json');
 
 echo json_encode($bot->getUsers());
+
 ?>

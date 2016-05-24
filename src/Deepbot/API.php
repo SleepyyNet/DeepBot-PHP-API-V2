@@ -128,7 +128,7 @@ class API
 	{
 		return $this->makeRequest('api|set_vip|'.$username.'|'.$level.'|'.$days);
 	}
-
+	
 	public function getCommands($offset = 1, $limit = 100)
 	{
 		return $this->makeRequest('api|get_commands|'.$offset.'|'.$limit);
