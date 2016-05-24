@@ -1,12 +1,8 @@
 <?php
 
-if (isset($_GET['server']) && isset($_GET['secret'])) {
-	$server = $_GET['server'];
-	$secret = $_GET['secret'];
-
-	// Load depedencies
-	require '../config/config_inc.php';
-	require '../vendor/autoload.php';
+// Load depedencies
+require '../config/config_inc.php';
+require '../vendor/autoload.php';
 
 $bot = Deepbot\API::instance(array(
 	'server' 	=> $config['server'],
@@ -14,27 +10,41 @@ $bot = Deepbot\API::instance(array(
 	'secret'	=> $config['secret']
 ));
 
-} else {
-	echo 'Not Set Up';
-}
-
 //Global Variable
-
 $pointsname = $config['pointsname'];
 
-//SetPoints
+if (isset($_GET['server']) && isset($_GET['secret'])) {
+	$server = $_GET['server'];
+	$secret = $_GET['secret'];
 
-if (isset($_GET['user'])) {
-	$user = $_GET['user'];
-	$newValue = $_GET['points'];
-	$bot->setUserPoints($user, $newValue);
-	if ($newValue == '') {
-		$newValue = $points;
+	//DelPoints
+	if (isset($_GET['user'])) {
+		$user = $_GET['user'];
+		$points = $_GET['points'];
+		$bot->setUserPoints($user, $points);
+		if ($points == '') {
+			$points = $points;
 	}
-	
-	echo 'Set ' . $user . ' ' . $newValue . ' ' . $pointsname;
+		echo 'Set ' . $user . ' ' . $points . ' ' . $pointsname;
+	} else {
+		echo 'UnSet';
+	}
+
 } else {
-	echo 'UnSet';
+	
+	//DelPoints
+	if (isset($_POST['user'])) {
+		$user = $_POST['user'];
+		$points = $_POST['points'];
+		$bot->setUserPoints($user, $points);
+		if ($points == '') {
+			$points = $points;
+		}
+		
+		echo 'Set ' . $user . ' ' . $points . ' ' . $pointsname;
+	} else {
+		echo 'UnSet';
+	}
 }
 
 ?>
